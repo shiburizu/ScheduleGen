@@ -3,7 +3,10 @@ import drawsvg as draw
 from datetime import datetime, timedelta
 import colors as colr
 import colorsys
-from zoneinfo import ZoneInfo
+try:
+    import ZoneInfo
+except ImportError:
+    from backports.zoneinfo import ZoneInfo
 
 def calc_offset(dt : datetime):
     offset = None
@@ -450,7 +453,7 @@ def draw_conversion_box(day, zones, time_blocks, block_times,  transform=f"trans
     return obj_width, obj_height, CV_Box
 
 #draw the entirety of a stream day
-def draw_day(event_name, day, time_zone_name, format, cv_zones, c_map):
+def draw_day(event_name, day, time_zone_name, format, cv_zones, c_map,return_text=False):
     
     earliest = None
     latest = None
@@ -491,6 +494,9 @@ def draw_day(event_name, day, time_zone_name, format, cv_zones, c_map):
     day_canvas.append(draw.Rectangle(0,0,width, height, fill="grey"))
     day_canvas.append(streams[2])
     day_canvas.append(cv_box[2])
-
-    filename = event_name + day['day'] + '.svg'
-    day_canvas.save_svg(filename)
+    # alt behavior to return svg tags
+    if return_text:
+        return day_canvas.as_svg()
+    else:
+        filename = event_name + day['day'] + '.svg'
+        day_canvas.save_svg(filename)
