@@ -15,6 +15,8 @@ def generate_schedules(file):
                     color = block['color']
                     if type(color) == int:
                         color_ids.append(color)
+                    
+
 
             color_ids = (list(set(color_ids)))
             color_palette = colors.gen_color_palette(event["event"]["color_palette"], len(color_ids))
@@ -23,7 +25,10 @@ def generate_schedules(file):
                 c_map[c] = color_palette[len(c_map)]
 
         for day in event['event']['days']:
-            drawfunc.draw_day(event['event']['name'], day, event['event']['time zone'], event['event']['time format'], event['event']['zones'], c_map)
+            drawfunc.draw_day(event['event']['name'], day, event['event']['time zone'], event['event']['zone_text'], event['event']['time format'], event['event']['zones'], c_map)
+        
+        drawfunc.draw_tournament_box(event)
+
 
 generate_schedules(sys.argv[1])
    
