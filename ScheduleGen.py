@@ -1,10 +1,8 @@
+import sys
 import json
 from Constants import *
 import draw_functions as drawfunc
 import colors
-
-#with open('example.json', 'r', encoding='utf-8') as jsonfile:
-#    event = json.load(jsonfile)
 
 def generate_schedules(file):
     with open(file, 'r', encoding='utf-8') as jsonfile:
@@ -27,6 +25,6 @@ def generate_schedules(file):
         for day in event['event']['days']:
             drawfunc.draw_day(event['event']['name'], day, event['event']['time zone'], event['event']['time format'], event['event']['zones'], c_map)
 
-#generate_schedules('example.json')
+generate_schedules(sys.argv[1])
    
 

@@ -18,6 +18,7 @@ def calc_offset(dt : datetime):
     return offset
 
 
+
 #CHECK THE Elements.py file in drawsvg before you reimplement any tags YOU FUCKING DUMBASS
 class Image(draw.DrawingBasicElement):
     TAG_NAME = 'image'
@@ -29,8 +30,8 @@ def draw_day_box(day, transform=f"translate({0}, {0})"):
     stream_day = draw.Group(transform=transform)
     obj_height = STREAM_DAY_BOX_HEIGHT * CELL_HEIGHT
     obj_width =  STREAM_DAY_BOX_WIDTH * CELL_WIDTH
-    stream_day.append(draw.Rectangle(0, 0, obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'yellow', shape_rendering="crispEdges"))
-    stream_day.append(draw.Text(day , 18, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Arial"))
+    stream_day.append(draw.Rectangle(0, 0, obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'white', shape_rendering="crispEdges"))
+    stream_day.append(draw.Text(day , 18, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Poppins"))
     return obj_width, obj_height, stream_day
 
 #draws the name of the time zone the event is taking place in
@@ -38,8 +39,8 @@ def draw_zone_name_box(zone_name,  transform=f"translate({0}, {0})"):
     stream_zone_name = draw.Group(transform=transform)
     obj_height = STREAM_ZONE_NAME_HEIGHT * CELL_HEIGHT
     obj_width = STREAM_ZONE_NAME_WIDTH * CELL_WIDTH
-    stream_zone_name.append(draw.Rectangle(0,0,obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'yellow',  shape_rendering="crispEdges"))
-    stream_zone_name.append(draw.Text(zone_name, 12, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Arial"))
+    stream_zone_name.append(draw.Rectangle(0,0,obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'white',  shape_rendering="crispEdges"))
+    stream_zone_name.append(draw.Text(zone_name, 12, obj_width/2, obj_height/2-2, center=True, fill="black", font_weight="bold", font_family="Poppins"))
     return obj_width, obj_height, stream_zone_name
 
 #combine the Day and the time zone name into one box
@@ -74,9 +75,9 @@ def draw_offset_box(offset,  transform=f"translate({0}, {0})"):
     else:
         string = "UTC" + str(offset)
     
-    offset_box.append(draw.Rectangle(0,0, obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'yellow', shape_rendering="crispEdges"))
+    offset_box.append(draw.Rectangle(0,0, obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'white', shape_rendering="crispEdges"))
     offset_box.append(draw.Rectangle(0,0, obj_width , obj_height, stroke = 'black', stroke_width = 1, fill="none", shape_rendering="crispEdges"))
-    offset_box.append(draw.Text(string, 14, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Arial"))
+    offset_box.append(draw.Text(string, 14, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Poppins"))
     return obj_width, obj_height, offset_box
 
 #combine the day and time zone name box with the utc offset box
@@ -102,7 +103,7 @@ def draw_pop_time_cell(time, transform=f"translate({0}, {0})"):
     obj_width = 2 * STREAM_15_MINUTE_WIDTH * CELL_WIDTH
     obj_height = STREAM_TIME_ZONE_BOX_HEIGHT * CELL_HEIGHT
     filled_cell = draw.Group(transform=transform)
-    text = draw.Text(time, 16,  obj_width/10, obj_height - (obj_height/3), center=False, fill= "white", font_weight="bold", font_family="Arial",  shape_rendering="crispEdges")
+    text = draw.Text(time, 16,  obj_width/10, obj_height - (obj_height/3), center=False, fill= "white", font_weight="bold", font_family="Poppins",  shape_rendering="crispEdges")
     block = draw.Rectangle(0,0, obj_width, obj_height, fill ="black")
     filled_cell.append(block)
     filled_cell.append(text)
@@ -184,10 +185,10 @@ def draw_stream_link(platform, streamer, transform=f"translate({0}, {0})"):
     obj_height = STREAM_LINK_BOX_HEIGHT * CELL_HEIGHT
 
     linkbox = draw.Group(transform = transform)
-    bg = draw.Rectangle(0,0, obj_width, obj_height, fill="pink", stroke = 'black', stroke_width = '0',  shape_rendering="crispEdges")
+    bg = draw.Rectangle(0,0, obj_width, obj_height, fill="black", stroke = 'black', stroke_width = '0',  shape_rendering="crispEdges")
     border = draw.Rectangle(0,0, obj_width, obj_height, stroke = 'black', stroke_width = 1, fill="none",  shape_rendering="crispEdges")
-    plat = draw.Text(platform, 10, obj_width/2, obj_height/4, center=True, font_weight="bold", font_family="Arial")
-    link = draw.Text(streamer, 14, obj_width/2, 5*obj_height/8, center=True, font_weight="bold", font_family="Arial")
+    plat = draw.Text(platform, 10, obj_width/2, obj_height/4, center=True, fill="white", font_weight="bold", font_family="Poppins")
+    link = draw.Text(streamer, 14, obj_width/2, 5*obj_height/8, center=True, fill="white", font_weight="bold", font_family="Poppins")
 
     linkbox.append(bg)
     linkbox.append(plat)
@@ -208,8 +209,8 @@ def draw_block(length, game_image, game_name, round, color, text_color, transfor
     img_y = (obj_height - img_height)/2
 
     game_logo = draw.Image(img_x + 2, img_y, img_width - 4, img_height - 4, game_image)
-    game_name_text = draw.Text(game_name, 14, 2*STREAM_15_MINUTE_WIDTH*CELL_WIDTH, obj_height/3, font_weight="bold", font_family="Arial", fill=text_color)
-    round_text = draw.Text(round, 14, 2 * STREAM_15_MINUTE_WIDTH * CELL_WIDTH, 3*obj_height/4, font_weight="bold", font_family="Arial", fill=text_color)
+    game_name_text = draw.Text(game_name, 14, 2*STREAM_15_MINUTE_WIDTH*CELL_WIDTH, obj_height/3, font_weight="bold", font_family="Poppins", fill=text_color)
+    round_text = draw.Text(round, 14, 2 * STREAM_15_MINUTE_WIDTH * CELL_WIDTH, 3*obj_height/4, font_weight="bold", font_family="Poppins", fill=text_color)
     border = draw.Rectangle(0,0, obj_width, obj_height, stroke = 'black', stroke_width = 1, fill=color, shape_rendering="crispEdges")
 
     block = draw.Group(transform = transform)
@@ -317,14 +318,17 @@ def draw_dayStreams(day, start_time, date, time_zone, color_map, time_format,
     return obj_width, obj_height, dayGroup
 
 #draw the box that says what day the time zones are
-def draw_conversion_header(day, num_cells, transform=f"translate({0}, {0})"):
+def draw_conversion_header(day, num_cells, transform=f"translate({0}, {0})",daybefore=False):
     obj_width = (STREAM_TIME_ZONE_BOX_WIDTH + STREAM_DAY_BOX_WIDTH + (STREAM_15_MINUTE_WIDTH * num_cells)) * CELL_WIDTH
     obj_height = CONVERSION_HEADER_HEIGHT * CELL_HEIGHT
     rectangle = draw.Rectangle(0,0,obj_width,obj_height, fill ="black",  shape_rendering="crispEdges")
     days = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
-    next_day = (days.index(day['day'].upper()) + 1) % 7
-    text = draw.Text("ADDITIONAL TIME ZONES - " + day['day'].upper() , 18, obj_width/2, obj_height/2, center=True, fill="white", font_weight="bold", font_family="Arial")
-    text.append(draw.TSpan("(" + days[next_day].lower().capitalize() +" in blue)", font_size="18",  fill="white", font_weight="bold", font_family="Arial"))
+    if daybefore is True:
+        next_day = (days.index(day['day'].upper()) + 1) % 7
+    else:
+        next_day = (days.index(day['day'].upper()) - 1) % 7
+    text = draw.Text("ADDITIONAL TIME ZONES - " + day['day'].upper() , 18, obj_width/2, obj_height/2, center=True, fill="white", font_weight="bold", font_family="Poppins")
+    text.append(draw.TSpan(" (" + days[next_day].lower().capitalize() +" in blue)", font_size="18",  fill="white", font_weight="bold", font_family="Poppins"))
     header = draw.Group(transform=transform)
     header.append(rectangle)
     header.append(text)
@@ -335,7 +339,7 @@ def draw_conversion_row_text(text, transform=f"translate({0}, {0})"):
     obj_width = TIME_ZONE_TEXT_WIDTH * CELL_WIDTH
     obj_height = TIME_ZONE_ROW_HEIGHT * CELL_HEIGHT
     rectangle = draw.Rectangle(0,0, obj_width, obj_height, stroke= "black", stroke_width = 1, fill = "white", shape_rendering="crispEdges" )
-    rowText = draw.Text(text, 16, obj_width/2, obj_height/2, center=True, font_family="Arial", fill="black", font_weight="bold")
+    rowText = draw.Text(text, 16, obj_width/2, obj_height/2, center=True, font_family="Poppins", fill="black", font_weight="bold")
     row_text_box = draw.Group(transform=transform)
     row_text_box.append(rectangle)
     row_text_box.append(rowText)
@@ -355,7 +359,7 @@ def draw_conversion_offset_box(offset,  transform=f"translate({0}, {0})"):
         string = "UTC" + str(offset)
     offset_box.append(draw.Rectangle(0,0, obj_width, obj_height, stroke = "black", stroke_width = 0, fill = 'white', shape_rendering="crispEdges"))
     offset_box.append(draw.Rectangle(0,0, obj_width , obj_height, stroke = 'black', stroke_width = 1, fill="none", shape_rendering="crispEdges"))
-    offset_box.append(draw.Text(string, 14, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Arial"))
+    offset_box.append(draw.Text(string, 14, obj_width/2, obj_height/2, center=True, fill="black", font_weight="bold", font_family="Poppins"))
     return obj_width, obj_height, offset_box
 
 #draws the blank cells in the correct colors corresponding to the days
@@ -376,7 +380,7 @@ def draw_cv_time_cell(time, transform=f"translate({0}, {0})"):
     obj_width = 2 * STREAM_15_MINUTE_WIDTH * CELL_WIDTH
     obj_height = TIME_ZONE_ROW_HEIGHT * CELL_HEIGHT
     filled_cell = draw.Group(transform=transform)
-    text = draw.Text(time, 16,  obj_width/10, obj_height - (obj_height/3), center=False, fill= "black", font_weight="bold", font_family="Arial",  shape_rendering="crispEdges")
+    text = draw.Text(time, 14,  obj_width/10, obj_height - (obj_height/3), center=False, fill= "black", font_weight="bold", font_family="Poppins",  shape_rendering="crispEdges")
     block = draw.Rectangle(0,0, obj_width, obj_height, fill ="none")
     filled_cell.append(block)
     filled_cell.append(text)

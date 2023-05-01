@@ -1,2 +1,7 @@
 /__pycache__
 *.svg
+/Game Logos
+/Series
+/Streamer Logos
+/Tourney Logos
+*.json
